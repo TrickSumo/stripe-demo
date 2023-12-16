@@ -35,11 +35,11 @@ app.post("/create-stripe-session", async (req, res) => {
     mode: "payment",
     success_url: "http://localhost:3000/success",
     cancel_url: "http://localhost:3000/cancel",
-    customer_email: "a@a.com",
-    // Add this to collect shipping address
-    shipping_address_collection: {
-      allowed_countries: ["IN", "NP", "US"], // Allow all countries, or specify an array of country codes
-    },
+    // customer_email: "hello@tricksumo.com",
+    // // Add this to collect shipping address
+    // shipping_address_collection: {
+    //   allowed_countries: ["IN", "NP", "US"], // Allow all countries, or specify an array of country codes
+    // },
   });
   res.json({ id: session.id });
 });
