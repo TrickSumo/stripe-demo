@@ -29,7 +29,7 @@ app.use(bodyParser.raw({ type: "application/json" }));
 // =====================================================================================
 
 app.post("/create-stripe-session-subscription", async (req, res) => {
-  const userEmail = "Helloo634@example.com"; // Replace with actual user email
+  const userEmail = "hello@tricksumo.com"; // Replace with actual user email
   let customer;
   const auth0UserId = "OLR5eSFm2CEgn2U06Z";
 
@@ -57,7 +57,7 @@ app.post("/create-stripe-session-subscription", async (req, res) => {
 
       const stripeSession = await stripe.billingPortal.sessions.create({
         customer: customer.id,
-        return_url: "https://example.com",
+        return_url: "http://localhost:3000/",
       });
       return res.status(409).json({ redirectUrl: stripeSession.url });
     }
@@ -98,7 +98,7 @@ app.post("/create-stripe-session-subscription", async (req, res) => {
       metadata: {
         userId: auth0UserId,
       },
-      // customer_email: "Hello63@example.com",
+      // customer_email: "hello@tricksumo.com",
       customer: customer.id, // Use the customer ID here
     });
 
