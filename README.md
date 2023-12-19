@@ -14,8 +14,8 @@
 
         No===============================================
 
-        1. Create new customer account in stripe
-        2. Send To checkout page
+            1. Create new customer account in stripe
+            2. Send To checkout page
 
 **WEBHOOK ROUTE**
 
