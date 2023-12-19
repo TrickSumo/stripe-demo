@@ -4,5 +4,5 @@
 
 Checkout branches for:-
 
-- ![One-time payment intergration](https://github.com/TrickSumo/stripe-demo/tree/one-time-payment)
-- ![Stripe subscription integraion](https://github.com/TrickSumo/stripe-demo/tree/subscription)
+- [One-time payment intergration](https://github.com/TrickSumo/stripe-demo/tree/one-time-payment)
+- [Stripe subscription integraion](https://github.com/TrickSumo/stripe-demo/tree/subscription)
