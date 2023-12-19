@@ -2,20 +2,20 @@
 
 **SESSION Creation ROUTE**
 
-If existing customer
+    If existing customer
 
-    Yes==============================================
+        Yes==============================================
 
-        Is already subscribed?
+            Is already subscribed?
 
-            Yes => send to subscription management
+                Yes => send to subscription management
 
-            No => send to checkout page
+                No => send to checkout page
 
-    No===============================================
+        No===============================================
 
-    1. Create new customer account in stripe
-    2. Send To checkout page
+        1. Create new customer account in stripe
+        2. Send To checkout page
 
 **WEBHOOK ROUTE**
 
