@@ -3,26 +3,34 @@
 **SESSION Creation ROUTE**
 
 If existing customer
-Yes==============================================
-Is already subscribed?
-Yes => send to subscription management
-No => send to checkout page
 
-No=============================================== 1. Create new customer account in stripe 2. Send To checkout page
+    Yes==============================================
+
+        Is already subscribed?
+
+            Yes => send to subscription management
+
+            No => send to checkout page
+
+
+    No===============================================
+
+    1. Create new customer account in stripe
+    2. Send To checkout page
 
 **WEBHOOK ROUTE**
 
-Billing Reason isSubscription Created?
-Insert Record in DB
-Billing Reason is Subscription Update?
-Update REcord in DB
+    Billing Reason isSubscription Created?
+        Insert Record in DB
+    Billing Reason is Subscription Update?
+        Update REcord in DB
 
-Commands:-
+**Commands:-**
 
 - stripe login
 - stripe listen --forward-to localhost:3001/webhook-onetime-payment
 
-Docs:-
+**Docs:-**
 
 - https://stripe.com/docs/api/checkout/sessions/create
 - https://stripe.com/docs/payments/checkout/how-checkout-works
