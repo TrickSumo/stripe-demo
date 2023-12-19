@@ -29,9 +29,9 @@ app.use(bodyParser.raw({ type: "application/json" }));
 // =====================================================================================
 
 app.post("/create-stripe-session-subscription", async (req, res) => {
-  const userEmail = "hello@tricksumo.com"; // Replace with actual user email
+  const userEmail = "rishi123@tricksumo.com"; // Replace with actual user email
   let customer;
-  const auth0UserId = "OLR5eSFm2CEgn2U06Z";
+  const auth0UserId = userEmail;
 
   // Try to retrieve an existing customer by email
   const existingCustomers = await stripe.customers.list({
@@ -69,41 +69,41 @@ app.post("/create-stripe-session-subscription", async (req, res) => {
         userId: auth0UserId, // Replace with actual Auth0 user ID
       },
     });
-
-    //   console.log(customer);
-
-    // Now create the Stripe checkout session with the customer ID
-    const session = await stripe.checkout.sessions.create({
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cancel",
-      payment_method_types: ["card"],
-      mode: "subscription",
-      billing_address_collection: "auto",
-      line_items: [
-        {
-          price_data: {
-            currency: "inr",
-            product_data: {
-              name: "Online Video Editor",
-              description: "Unlimited Viedo Edits!",
-            },
-            unit_amount: 20000,
-            recurring: {
-              interval: "month",
-            },
-          },
-          quantity: 1,
-        },
-      ],
-      metadata: {
-        userId: auth0UserId,
-      },
-      // customer_email: "hello@tricksumo.com",
-      customer: customer.id, // Use the customer ID here
-    });
-
-    res.json({ id: session.id });
   }
+
+  //   console.log(customer);
+
+  // Now create the Stripe checkout session with the customer ID
+  const session = await stripe.checkout.sessions.create({
+    success_url: "http://localhost:3000/success",
+    cancel_url: "http://localhost:3000/cancel",
+    payment_method_types: ["card"],
+    mode: "subscription",
+    billing_address_collection: "auto",
+    line_items: [
+      {
+        price_data: {
+          currency: "inr",
+          product_data: {
+            name: "Online Video Editor",
+            description: "Unlimited Viedo Edits!",
+          },
+          unit_amount: 20000,
+          recurring: {
+            interval: "month",
+          },
+        },
+        quantity: 1,
+      },
+    ],
+    metadata: {
+      userId: auth0UserId,
+    },
+    // customer_email: "hello@tricksumo.com",
+    customer: customer.id, // Use the customer ID here
+  });
+
+  res.json({ id: session.id });
 });
 
 // Order fulfilment route
@@ -196,6 +196,19 @@ app.post("/webhook", async (req, res) => {
       subscription.status,
       invoice.billing_reason
     );
+  }
+
+  // For canceled/renewed subscription
+  if (event.type === "customer.subscription.updated") {
+    const subscription = event.data.object;
+    // console.log(event);
+    if (subscription.cancel_at_period_end) {
+      console.log(`Subscription ${subscription.id} was canceled.`);
+      // DB code to update the customer's subscription status in your database
+    } else {
+      console.log(`Subscription ${subscription.id} was restarted.`);
+      // get subscription details and update the DB
+    }
   }
 
   res.status(200).end();
