@@ -19,7 +19,7 @@
 
 **WEBHOOK ROUTE**
 
-    Billing Reason isSubscription Created?
+    Billing Reason is Subscription Created?
         Insert Record in DB
     Billing Reason is Subscription Update?
         Update Record in DB
